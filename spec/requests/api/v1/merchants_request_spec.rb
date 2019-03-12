@@ -119,4 +119,50 @@ describe "Merchants API" do
     # expect(merchant["data"].first["updated_at"]).to eq("2012-03-27T14:59:09.000Z")
     # expect(merchant["data"].last["updated_at"]).to eq("2012-03-27T14:59:09.000Z")
   end
+
+      # _______ RELATIONSHIP ENDPOINTS TESTS ________
+
+  it 'can get a list of all the items for a merchant' do
+    id = create(:merchant).id
+
+    5.times do
+      create(:item, merchant_id: id)
+    end
+
+    merchant_2 = create(:merchant)
+    create(:item, merchant_id: merchant_2.id)
+
+    get "/api/v1/merchants/#{id}/items"
+
+    items = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(items.count).to eq(5)
+  end
+
+  it 'can get a list of all of the invoices associated with a merchant' do
+    merchant_id = create(:merchant).id
+    customer_id  = create(:customer).id
+    10.times do
+      create(:invoice, customer_id: customer_id, merchant_id: merchant_id)
+    end
+
+    merchant_2_id = create(:merchant).id
+    create(:invoice, customer_id: customer_id, merchant_id: merchant_2_id)
+
+    get "/api/v1/merchants/#{merchant_id}/invoices"
+
+    invoices = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoices.count).to eq(10)
+  end
+
+      # _______ BUSINESS INTELLIGENCE ENDPOINTS TESTS ________
+
+  describe 'business intelligence endpoints' do
+    it 'returns the top ? merchants ranked by total revenue' do
+
+      end
+  end
 end
