@@ -161,8 +161,37 @@ describe "Merchants API" do
       # _______ BUSINESS INTELLIGENCE ENDPOINTS TESTS ________
 
   describe 'business intelligence endpoints' do
-    it 'returns the top ? merchants ranked by total revenue' do
+    it 'returns the top x merchants ranked by total revenue' do
+      merchant_1 = create(:merchant)
+      merchant_2 = create(:merchant)
+      merchant_3 = create(:merchant)
+      merchant_4 = create(:merchant)
+      merchant_5 = create(:merchant)
 
-      end
+      item_1 = create(:item, merchant_id: merchant_1.id)
+      item_2 = create(:item, merchant_id: merchant_2.id)
+      item_3 = create(:item, merchant_id: merchant_3.id)
+      item_4 = create(:item, merchant_id: merchant_4.id)
+      item_5 = create(:item, merchant_id: merchant_5.id)
+
+      invoice_1 = create(:invoice, merchant_id: merchant_1.id)
+      invoice_2 = create(:invoice, merchant_id: merchant_2.id)
+      invoice_3 = create(:invoice, merchant_id: merchant_3.id)
+      invoice_4 = create(:invoice, merchant_id: merchant_4.id)
+      invoice_5 = create(:invoice, merchant_id: merchant_5.id)
+
+      invoice_item_1 = create(:invoice_item, quantity: 1, unit_price:  item_id: item_1.id, invoice_id: invoice_1.id)
+      invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice_2.id)
+      invoice_item_3 = create(:invoice_item, item_id: item_3.id, invoice_id: invoice_3.id)
+      invoice_item_4 = create(:invoice_item, item_id: item_4.id, invoice_id: invoice_4.id)
+      invoice_item_5 = create(:invoice_item, item_id: item_5.id, invoice_id: invoice_5.id)
+
+      transaction_1 = create(:transaction, invoice_id: invoice_1.id, result: "success")
+      transaction_2 = create(:transaction, invoice_id: invoice_2.id, result: "success")
+      transaction_3 = create(:transaction, invoice_id: invoice_3.id, result: "success")
+      transaction_4 = create(:transaction, invoice_id: invoice_4.id, result: "success")
+      transaction_5 = create(:transaction, invoice_id: invoice_5.id, result: "success")
+      
+    end
   end
 end
