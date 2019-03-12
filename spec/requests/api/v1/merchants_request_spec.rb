@@ -134,10 +134,28 @@ describe "Merchants API" do
 
     get "/api/v1/merchants/#{id}/items"
 
-    merchant = JSON.parse(response.body)
+    items = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant.items.count).to eq(5)
+    expect(items.count).to eq(5)
+  end
+
+  it 'can get a list of all of the invoices associated with a merchant' do
+    merchant_id = create(:merchant).id
+    customer_id  = create(:customer).id
+    10.times do
+      create(:invoice, customer_id: customer_id, merchant_id: merchant_id)
+    end
+
+    merchant_2_id = create(:merchant).id
+    create(:invoice, customer_id: customer_id, merchant_id: merchant_2_id)
+
+    get "/api/v1/merchants/#{merchant_id}/invoices"
+
+    invoices = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(invoices.count).to eq(10)
   end
 
       # _______ BUSINESS INTELLIGENCE ENDPOINTS TESTS ________
