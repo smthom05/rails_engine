@@ -1,5 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Customer, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'relationships' do
+  end
+
+  describe 'validations' do
+  end
+
+  describe 'class methods' do
+  end
+
+  describe 'instance methods' do
+  end
+
 end
