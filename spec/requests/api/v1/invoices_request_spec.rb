@@ -132,8 +132,8 @@ describe "Invoices API" do
 
     expect(response).to be_successful
     expect(invoice["data"].count).to eq(3)
-    # expect(merchant["data"].first["created_at"]).to eq("2012-03-27T14:54:05.000Z")
-    # expect(merchant["data"].last["created_at"]).to eq("2012-03-27T14:54:05.000Z")
+    # expect(invoice["data"].first["created_at"]).to eq("2012-03-27T14:54:05.000Z")
+    # expect(invoice["data"].last["created_at"]).to eq("2012-03-27T14:54:05.000Z")
   end
 
   it 'can find all invoices with the same updated at time' do
@@ -148,9 +148,24 @@ describe "Invoices API" do
     invoice = JSON.parse(response.body)
     expect(response).to be_successful
     expect(invoice["data"].count).to eq(5)
-
-    # expect(merchant["data"].first["updated_at"]).to eq("2012-03-27T14:59:09.000Z")
-    # expect(merchant["data"].last["updated_at"]).to eq("2012-03-27T14:59:09.000Z")
   end
 
+  # _______ RELATIONSHIP ENDPOINTS TESTS ________
+
+  it 'can get a list of items associated with an invoice' do
+    id = create(:invoice).id
+    merchant_id = create(:merchant).id
+    item = create(:item, merchant_id: merchant_id)
+
+    4.times do
+      create(:invoice_item, item_id: item.id, invoice_id: id)
+    end
+
+    get "/api/v1/invoices/#{id}/items"
+
+    items = JSON.parse(response.body)
+
+    expect(response).to be_successful
+    expect(items.count).to eq(4)
+  end
 end
