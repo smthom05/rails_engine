@@ -10,6 +10,9 @@ RSpec.describe Merchant, type: :model do
   end
 
   describe 'class methods' do
+    it '.most_revenue' do
+      
+    end
   end
 
   describe 'instance methods' do
