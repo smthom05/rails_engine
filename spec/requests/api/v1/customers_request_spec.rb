@@ -10,7 +10,7 @@ describe 'Customers API' do
     expect(Customer.count).to eq(5)
   end
 
-  it 'can get a merchant by its id' do
+  it 'can get a customer by its id' do
     id = create(:customer).id
 
     get "/api/v1/customers/#{id}"
@@ -18,7 +18,7 @@ describe 'Customers API' do
     customer = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(customer['id']).to eq(id)
+    expect(customer["data"]["attributes"]['id']).to eq(id)
   end
 
   it 'can get the first customer by its first name' do
