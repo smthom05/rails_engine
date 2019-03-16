@@ -3,6 +3,6 @@ FactoryBot.define do
     name { "Sandwich" }
     description { "Is it a sandwich?" }
     unit_price { 1 }
-    merchant { nil }
+    merchant 
   end
 end
