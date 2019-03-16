@@ -28,6 +28,13 @@ Rails.application.routes.draw do
       get "transactions/find_all", to: "transactions/search#index"
       get "transactions/:id/invoice", to: "transactions/invoices#show"
       resources :transactions, only: [:index, :show]
+
+      # Items Routes
+      get 'items/find', to: "items/search#show"
+      get 'items/find_all', to: "items/search#index"
+      get 'items/:id/invoice_items', to: "items/invoice_items#index"
+      get 'items/:id/merchant', to: "items/merchants#show"
+      resources :items, only: [:index, :show]
     end
   end
 end
