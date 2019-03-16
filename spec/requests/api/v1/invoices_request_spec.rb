@@ -152,20 +152,20 @@ describe "Invoices API" do
 
   # _______ RELATIONSHIP ENDPOINTS TESTS ________
 
-  it 'can get a list of items associated with an invoice' do
-    id = create(:invoice).id
-    merchant_id = create(:merchant).id
-    item = create(:item, merchant_id: merchant_id)
-
-    4.times do
-      create(:invoice_item, item_id: item.id, invoice_id: id)
-    end
-
-    get "/api/v1/invoices/#{id}/items"
-
-    items = JSON.parse(response.body)
-
-    expect(response).to be_successful
-    expect(items.count).to eq(4)
-  end
+  # it 'can get a list of items associated with an invoice' do
+  #   id = create(:invoice).id
+  #   merchant_id = create(:merchant).id
+  #   item = create(:item, merchant_id: merchant_id)
+  #
+  #   4.times do
+  #     create(:invoice_item, item_id: item.id, invoice_id: id)
+  #   end
+  #
+  #   get "/api/v1/invoices/#{id}/items"
+  #
+  #   items = JSON.parse(response.body)
+  #
+  #   expect(response).to be_successful
+  #   expect(items.count).to eq(4)
+  # end
 end
