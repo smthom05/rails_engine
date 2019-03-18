@@ -6,8 +6,10 @@ describe "Items API" do
 
     get "/api/v1/items"
 
+    items = JSON.parse(response.body)["data"]
+
     expect(response).to be_successful
-    expect(Item.count).to eq(10)
+    expect(items.count).to eq(10)
   end
 
   it 'can get an item by its id' do

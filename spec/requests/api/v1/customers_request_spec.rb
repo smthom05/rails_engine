@@ -6,8 +6,9 @@ describe 'Customers API' do
 
     get '/api/v1/customers'
 
+    customers = JSON.parse(response.body)["data"]
     expect(response).to be_successful
-    expect(Customer.count).to eq(5)
+    expect(customers.count).to eq(5)
   end
 
   it 'can get a customer by its id' do

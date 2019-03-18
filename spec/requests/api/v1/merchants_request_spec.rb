@@ -6,8 +6,10 @@ describe "Merchants API" do
 
     get '/api/v1/merchants'
 
+    merchants = JSON.parse(response.body)["data"]
+
     expect(response).to be_successful
-    expect(Merchant.count).to eq(3)
+    expect(merchants.count).to eq(3)
   end
 
   it 'can get a merchant by its id' do

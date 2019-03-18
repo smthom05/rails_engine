@@ -6,8 +6,10 @@ describe "Invoices API" do
 
     get '/api/v1/invoices'
 
+    invoices = JSON.parse(response.body)["data"]
+
     expect(response).to be_successful
-    expect(Invoice.count).to eq(5)
+    expect(invoices.count).to eq(5)
   end
 
   it 'can get an invoice by its id' do

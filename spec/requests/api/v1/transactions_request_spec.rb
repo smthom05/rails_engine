@@ -6,8 +6,10 @@ describe "Transactions API" do
 
     get '/api/v1/transactions'
 
+    transactions = JSON.parse(response.body)["data"]
+
     expect(response).to be_successful
-    expect(Transaction.count). to eq(5)
+    expect(transactions.count). to eq(5)
   end
 
   it 'can get an instance of transaction by id' do
